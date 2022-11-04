@@ -21,7 +21,9 @@ public class scoreboardController implements Initializable{
      */
     @FXML
     public void handleMouseClick(MouseEvent event){
-        System.out.println("clicked on " + myListView.getSelectionModel().getSelectedIndices());
+        int clickedIndex = myListView.getSelectionModel().getSelectedIndex();
+        System.out.println("clicked on " + clickedIndex);
+        //openEditorView(clickedIndex);
     }
 
     @Override
