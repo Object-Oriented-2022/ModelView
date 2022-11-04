@@ -17,6 +17,10 @@ public class Model {
         return teams;
     }
 
+    public static String getTeam(int index) {
+        return teams[index];
+    }
+
     public static void setTeam(String team, int index) {
         Model.teams[index] = team;
     }

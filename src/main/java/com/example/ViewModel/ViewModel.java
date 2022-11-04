@@ -1,18 +1,33 @@
 package com.example.ViewModel;
 
-import com.example.Model.Model;
+import com.example.HelloApplication;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 
-public class ViewModel{
-    //public ListView<String> list = new ListView<>();
+import static com.example.Model.Model.getTeam;
+
+public class ViewModel {
+
     @FXML
-    public ListView myListView;
+    private static String[] team;
 
+    public static void openEditorView(int index) throws IOException {
+        String clickedTeam = getTeam(index);
+        team = clickedTeam.split(" ");
 
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Editor.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader.load(), 440, 150);
+        stage.setTitle("Editor");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static String[] getClickedTeam(){
+        return team;
+    }
 }

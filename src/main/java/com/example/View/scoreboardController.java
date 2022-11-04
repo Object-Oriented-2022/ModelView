@@ -7,23 +7,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.example.ViewModel.ViewModel.openEditorView;
+
 public class scoreboardController implements Initializable{
-    @FXML
-    private Label label;
 
     @FXML
-    public ListView myListView;
+    public ListView<String> myListView;
 
     /*Learning: scoreboard click event "Action event"
      */
     @FXML
-    public void handleMouseClick(MouseEvent event){
+    public void handleMouseClick(MouseEvent event) throws IOException {
         int clickedIndex = myListView.getSelectionModel().getSelectedIndex();
         System.out.println("clicked on " + clickedIndex);
-        //openEditorView(clickedIndex);
+        openEditorView(clickedIndex);
     }
 
     @Override
