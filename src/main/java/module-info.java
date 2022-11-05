@@ -5,6 +5,8 @@ module com.example.cs4773hw {
 
     opens com.example to javafx.fxml;
     exports com.example;
+    opens com.example.Teams;
+    exports com.example.Teams;
     opens com.example.View;
     exports com.example.View;
     exports com.example.ViewModel;

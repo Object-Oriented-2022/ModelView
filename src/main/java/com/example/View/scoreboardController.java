@@ -1,6 +1,5 @@
 package com.example.View;
 
-import com.example.Model.Model;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -11,6 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.example.ViewModel.ViewModel.openEditorView;
+import static com.example.ViewModel.ViewModel.populateScoreboard;
 
 public class scoreboardController implements Initializable{
 
@@ -27,6 +27,7 @@ public class scoreboardController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        myListView.getItems().addAll(Model.getTeams());
+        myListView.getItems().addAll(populateScoreboard());
+        //myListView.getItems().addAll(getTeams());
     }
 }

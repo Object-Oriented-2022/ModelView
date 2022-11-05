@@ -1,11 +1,11 @@
 package com.example.Teams;
 
-public class Teams {
+public class Team {
     private String name;
     private String score;
     private String timeStamp;
 
-    public Teams(String name, String score, String timeStamp) {
+    public Team(String name, String score, String timeStamp) {
         this.name = name;
         this.score = score;
         this.timeStamp = timeStamp;
@@ -37,7 +37,6 @@ public class Teams {
 
     @Override
     public String toString() {
-        return "Teams{" +
-                name + "\t" + score + "\t" + timeStamp;
+        return name + "\t" + score + "\t" + timeStamp;
     }
 }
