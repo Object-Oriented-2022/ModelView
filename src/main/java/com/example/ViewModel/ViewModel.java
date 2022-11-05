@@ -1,23 +1,25 @@
 package com.example.ViewModel;
 
 import com.example.HelloApplication;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.example.Model.Model.getTeam;
 
 public class ViewModel {
 
-    @FXML
-    private static String[] team;
+    private static ArrayList<String> teamList = new ArrayList<>();
 
     public static void openEditorView(int index) throws IOException {
+        clearList();
         String clickedTeam = getTeam(index);
-        team = clickedTeam.split(" ");
+        String[] team = clickedTeam.split(" ");
+        teamList.addAll(Arrays.asList(team));
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Editor.fxml"));
         Stage stage = new Stage();
@@ -27,7 +29,11 @@ public class ViewModel {
         stage.show();
     }
 
-    public static String[] getClickedTeam(){
-        return team;
+    public static ArrayList<String> getClickedTeam(){
+        return teamList;
+    }
+
+    private static void clearList(){
+        teamList.clear();
     }
 }

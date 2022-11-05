@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static com.example.Model.Model.getTimeStamp;
@@ -22,16 +23,14 @@ public class editorController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String[] teamInfo = getClickedTeam();
-
-        myName.setText(teamInfo[0]);
-        myScore.setText(teamInfo[1]);
-        if(teamInfo.length < 2){
+        ArrayList<String> teamInfo = getClickedTeam();
+        myName.setText(teamInfo.get(0));
+        myScore.setText(teamInfo.get(1));
+        if(teamInfo.size() == 2){
             myDate.setText(getTimeStamp());
         } else {
-            myDate.setText(teamInfo[2]);
+            myDate.setText(teamInfo.get(2));
         }
-
     }
 }
 

@@ -3,7 +3,6 @@ package com.example.View;
 import com.example.Model.Model;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 
@@ -23,7 +22,6 @@ public class scoreboardController implements Initializable{
     @FXML
     public void handleMouseClick(MouseEvent event) throws IOException {
         int clickedIndex = myListView.getSelectionModel().getSelectedIndex();
-        System.out.println("clicked on " + clickedIndex);
         openEditorView(clickedIndex);
     }
 
