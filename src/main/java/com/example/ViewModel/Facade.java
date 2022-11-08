@@ -1,4 +1,4 @@
 package com.example.ViewModel;
 
-public class ViewHandler {
+public class Facade {
 }

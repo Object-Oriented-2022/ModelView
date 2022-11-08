@@ -16,8 +16,6 @@ public class scoreboardController implements Initializable{
     @FXML
     public ListView<String> myListView;
 
-    /*Learning: scoreboard click event "Action event"
-     */
     @FXML
     public void handleMouseClick() throws IOException {
         int clickedIndex = myListView.getSelectionModel().getSelectedIndex();
@@ -27,5 +25,9 @@ public class scoreboardController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         myListView.getItems().addAll(populateScoreboard());
+    }
+
+    public void updateScoreboard() {
+        myListView.getItems().setAll(populateScoreboard());
     }
 }
