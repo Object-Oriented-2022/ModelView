@@ -7,18 +7,20 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
-import static com.example.Model.Model.getTeam;
-import static com.example.Model.Model.getTeams;
+import static com.example.Model.Model.*;
 
 public class ViewModel {
 
-    private static ArrayList<String> teamList = new ArrayList<>();
+    private static ArrayList<String> editorTeam = new ArrayList<>();
+    private static ArrayList<Team> teams = new ArrayList<>();
 
     public static String[] populateScoreboard(){
-        ArrayList<Team> teams = getTeams();
+        teams = getTeams();
         String[] scoreboardInfo = new String[5];
         int i = 0;
         for (Team team : teams) {
@@ -32,7 +34,7 @@ public class ViewModel {
     public static void openEditorView(int index) throws IOException {
         clearList();
         String[] clickedTeam = getTeam(index);
-        teamList.addAll(Arrays.asList(clickedTeam));
+        editorTeam.addAll(Arrays.asList(clickedTeam));
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Editor.fxml"));
         Stage stage = new Stage();
@@ -43,10 +45,24 @@ public class ViewModel {
     }
 
     public static ArrayList<String> getClickedTeam(){
-        return teamList;
+        return editorTeam;
     }
 
     private static void clearList(){
-        teamList.clear();
+        editorTeam.clear();
+    }
+
+    public static String newTimeStamp() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return dateFormat.format(new Date());
+    }
+
+    public static void updateStages(Team newInfo){
+        System.out.println(newInfo.toString());
+        //search by previous date?
+
+        //need to grab stage info
+        //need to set each stage to newInfo
+
     }
 }
