@@ -71,14 +71,19 @@ public class editorController implements Initializable{
     }
 
     private boolean setScore(String score) {
-        int scoreValue = Integer.parseInt(score);
+        int scoreValue;
+        try{
+            scoreValue = Integer.parseInt(score);
+        } catch (NumberFormatException error){
+            System.out.println("Error: number format problem");
+            myScore.setText(setTeam.getScore());
+            return false;
+        }
         if(score.equals(setTeam.getScore())){
             myScore.setText(score);
             return false;
         }
-        if(score.isEmpty() || scoreValue == 0){
-            myScore.setText("0");
-        } else if (scoreValue >= 0 && scoreValue <= 2000){
+        if (scoreValue >= 0 && scoreValue <= 2000){
             myScore.setText(score);
         } else {
             myScore.setText(setTeam.getScore());
@@ -86,6 +91,5 @@ public class editorController implements Initializable{
         }
         return true;
     }
-
 }
 
