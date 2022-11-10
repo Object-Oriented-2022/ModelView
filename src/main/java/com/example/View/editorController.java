@@ -22,9 +22,12 @@ public class editorController implements Initializable{
     Button mySave;
     int index;
 
+    Team setTeam;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Team teamInfo = getClickedTeam();
+        setTeam = teamInfo;
         index = teamInfo.getIndex();
         updateStage(teamInfo);
     }
@@ -32,10 +35,17 @@ public class editorController implements Initializable{
     @FXML
     public void sendNewData(){
         String name = myName.getText();
+        boolean nameUpdated = setName(name);
         String score = myScore.getText();
-        Team team = new Team(index, name, score);
-        myDate.setText(team.getTimeStamp());
-        updateStages(team);
+        boolean scoreUpdated = setScore(score);
+        if(!nameUpdated && !scoreUpdated){
+            myDate.setText(setTeam.getTimeStamp());
+        } else {
+            Team newTeam = new Team(index, name, score);
+            myDate.setText(newTeam.getTimeStamp());
+            setTeam = newTeam;
+            updateStages(newTeam);
+        }
     }
 
     public void updateStage(Team teamInfo){
@@ -43,5 +53,39 @@ public class editorController implements Initializable{
         myScore.setText(teamInfo.getScore());
         myDate.setText(teamInfo.getTimeStamp());
     }
+
+    private boolean setName(String name) {
+        if(name.equals(setTeam.getName())){
+            myName.setText(name);
+            return false;
+        }
+        if(name.length() >= 5 && name.length() <= 50){
+            if(name.chars().allMatch(Character::isLetterOrDigit)){
+                myName.setText(name);
+            }
+        } else {        //TOO long or short or is empty set back to original value
+            myName.setText(setTeam.getName());
+            return false;
+        }
+        return true;
+    }
+
+    private boolean setScore(String score) {
+        int scoreValue = Integer.parseInt(score);
+        if(score.equals(setTeam.getScore())){
+            myScore.setText(score);
+            return false;
+        }
+        if(score.isEmpty() || scoreValue == 0){
+            myScore.setText("0");
+        } else if (scoreValue >= 0 && scoreValue <= 2000){
+            myScore.setText(score);
+        } else {
+            myScore.setText(setTeam.getScore());
+            return false;
+        }
+        return true;
+    }
+
 }
 

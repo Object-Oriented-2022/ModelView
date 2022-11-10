@@ -7,13 +7,13 @@ public class Team {
     private int index;
     private String name;
     private String score;
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     private String timeStamp;
 
     public Team(int index, String name, String score) {
         this.index = index;
         this.name = name;
         this.score = score;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         this.timeStamp = dateFormat.format(new Date());
     }
 
