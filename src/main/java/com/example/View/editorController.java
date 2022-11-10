@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.example.ViewModel.ViewModel.*;
 
@@ -59,17 +61,22 @@ public class editorController implements Initializable{
             myName.setText(name);
             return false;
         }
-        if(name.length() >= 5 && name.length() <= 50){
-            if(name.chars().allMatch(Character::isLetterOrDigit)){
+        if(name.length() >= 5 && name.length() <= 50) {
+            Pattern p = Pattern.compile("^[a-zA-Z0-9 _.-]*$");
+            Matcher m = p.matcher(name);
+            boolean b = m.matches();
+            if (b == false) {
+                myName.setText(setTeam.getName());
+                return false;
+            } else{
                 myName.setText(name);
+                return true;
             }
         } else {        //TOO long or short or is empty set back to original value
             myName.setText(setTeam.getName());
             return false;
         }
-        return true;
     }
-
     private boolean setScore(String score) {
         int scoreValue;
         try{

@@ -8,7 +8,7 @@ public class Model {
         {
             add(new Team(0, "Highly Irresistible Lions", "45"));
             add(new Team(1,"Immovable Tigers", "75"));
-            add(new Team(2,"Super Duper Bears", "100"));
+            add(new Team(2,"Super  Duper Bears", "100"));
             add(new Team(3,"Incomparable Otters", "30"));
             add(new Team(4,"Resplendent Ocelot", "8"));
         }
