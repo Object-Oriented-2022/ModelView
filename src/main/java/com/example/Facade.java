@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.Teams.Team;
 import com.example.View.editorController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.example.ViewModel.ViewModel.setScoreboardController;
+import static com.example.ViewModel.ViewModel.updateStages;
 
 public class Facade {
 
@@ -35,7 +37,7 @@ public class Facade {
         setScoreboardController(fxmlLoader.getController());
     }
 
-    private String checkName(String newInfo, String oldInfo) {
+    private static String checkName(String newInfo, String oldInfo) {
         System.out.println(newInfo);
         //no changes are made?
         if(newInfo.equals(oldInfo)){
@@ -60,7 +62,7 @@ public class Facade {
             return oldInfo;
         }
     }
-    private String checkScore(String newInfo, String oldInfo) {
+    private static String checkScore(String newInfo, String oldInfo) {
         int scoreValue;
         try{
             scoreValue = Integer.parseInt(newInfo);
@@ -79,5 +81,16 @@ public class Facade {
             //not inside the limit, set back to original
             return oldInfo;
         }
+    }
+    public static Team checkTeam(Team newInfo, Team oldInfo) {
+        String name = checkName(newInfo.getName(), oldInfo.getName());
+        String score = checkScore(newInfo.getScore(), oldInfo.getScore());
+        Team newTeam = new Team(oldInfo.getIndex(), name, score);
+        //check if no changes return original oldteam.getTimeStamp()
+        if (!newInfo.getName().equals(oldInfo.getName())) {
+            //myDate.setText(setTeam.getTimeStamp());
+            newTeam.setTimeStamp(oldInfo.getTimeStamp());
+        }
+        return newTeam;
     }
 }
