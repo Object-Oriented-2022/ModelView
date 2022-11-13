@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.example.ViewModel.ViewModel.setScoreboardController;
 
@@ -31,5 +33,51 @@ public class Facade {
         stage.setScene(scene);
         stage.show();
         setScoreboardController(fxmlLoader.getController());
+    }
+
+    private String checkName(String newInfo, String oldInfo) {
+        System.out.println(newInfo);
+        //no changes are made?
+        if(newInfo.equals(oldInfo)){
+            return newInfo;
+        }
+        //if empty
+        else if (newInfo == null || newInfo.trim().isEmpty()) {
+            return (newInfo = "No name provided");
+        }
+        //check for length restrictions
+        else if(newInfo.length() >= 5 && newInfo.length() <= 50) {
+            Pattern p = Pattern.compile("^[a-zA-Z0-9 .-]*$");
+            Matcher m = p.matcher(newInfo);
+            boolean b = m.matches();
+            if (!b) {
+                //TODO: change
+                return oldInfo;
+            } else{
+                return newInfo;
+            }
+        } else {        //TOO long or short or is empty set back to original value
+            return oldInfo;
+        }
+    }
+    private String checkScore(String newInfo, String oldInfo) {
+        int scoreValue;
+        try{
+            scoreValue = Integer.parseInt(newInfo);
+        } catch (NumberFormatException error){
+            System.out.println("Error: number format problem");
+            //error set back to original
+            return oldInfo;
+        }
+        if(newInfo.equals(oldInfo)){
+           //if score is hasn't changed set to original
+            return oldInfo;
+        }
+        if (scoreValue >= 0 && scoreValue <= 2000){
+            return newInfo;
+        } else {
+            //not inside the limit, set back to original
+            return oldInfo;
+        }
     }
 }
