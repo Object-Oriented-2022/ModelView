@@ -36,6 +36,10 @@ public class Team {
         return timeStamp;
     }
 
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
     @Override
     public String toString() {
         return name + "\t" + score + "\t" + timeStamp;
