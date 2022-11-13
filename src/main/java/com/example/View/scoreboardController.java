@@ -1,6 +1,5 @@
 package com.example.View;
 
-import com.example.ViewModel.ViewModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;

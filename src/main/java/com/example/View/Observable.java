@@ -6,9 +6,6 @@ import com.example.ViewModel.Observer;
 import java.util.LinkedList;
 
 public class Observable {
-
-    //Controller controller;
-    //editorController and scoreboardController
     LinkedList<Observer> observers = new LinkedList<>();
 
     public void addObserver(Observer observer){

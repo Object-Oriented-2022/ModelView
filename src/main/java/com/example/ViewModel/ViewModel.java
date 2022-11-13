@@ -35,7 +35,6 @@ public class ViewModel implements Observer {
             scoreboardInfo[i] = row;
             i++;
         }
-        //registered with scoreboard
         controller.addObserver(new ViewModel());
         //stages.add(new Linked)
         return scoreboardInfo;
@@ -44,7 +43,6 @@ public class ViewModel implements Observer {
     public static void openEditorView(int index) throws IOException {
         clickedTeam = getTeam(index);
         editorController controller = loadEditor();
-        //register with controller observer;
         controller.addObserver(new ViewModel());
         stages.get(index).add(controller);
     }
@@ -53,14 +51,6 @@ public class ViewModel implements Observer {
         return clickedTeam;
     }
 
-    /*public static void updateStages(Team newInfo){
-        int index = newInfo.getIndex();
-        for(int i = 0; i < stages.get(index).size(); i++){
-            stages.get(index).get(i).updateStage(newInfo);
-        }
-        setTeam(newInfo);
-        scoreboardController.updateScoreboard();
-    }*/
     public static void setScoreboardController(scoreboardController controller) {
         scoreboardController = controller;
     }

@@ -52,7 +52,6 @@ public class Facade {
             Matcher m = p.matcher(newInfo);
             boolean b = m.matches();
             if (!b) {
-                //TODO: change
                 return oldInfo;
             } else{
                 return newInfo;
@@ -85,9 +84,7 @@ public class Facade {
         String name = checkName(newInfo.getName(), oldInfo.getName());
         String score = checkScore(newInfo.getScore(), oldInfo.getScore());
         Team newTeam = new Team(oldInfo.getIndex(), name, score);
-        //check if no changes return original oldteam.getTimeStamp()
         if (!name.equals(oldInfo.getName()) && !score.equals(oldInfo.getScore())) {
-            //myDate.setText(setTeam.getTimeStamp());
             newTeam.setTimeStamp(oldInfo.getTimeStamp());
         }
         return newTeam;
