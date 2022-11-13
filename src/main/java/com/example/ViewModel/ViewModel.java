@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import static com.example.Model.Model.*;
 import static com.example.Facade.loadEditor;
 
+//implements observer method
 public class ViewModel {
 
     private static Team clickedTeam;

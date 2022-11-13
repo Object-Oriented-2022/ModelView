@@ -11,6 +11,8 @@ import static com.example.ViewModel.ViewModel.setScoreboardController;
 
 public class Facade {
 
+    //have to cast the editorController method
+
     public static editorController loadEditor() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(cs4773App.class.getResource("Editor.fxml"));
         Stage stage = new Stage();

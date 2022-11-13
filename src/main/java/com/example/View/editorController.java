@@ -24,7 +24,11 @@ public class editorController implements Initializable{
     Button mySave;
     int index;
 
+    //this can go away
     Team setTeam;
+
+    //linked list of all the observers of this view aka linkedlist<ViewModel>
+    //REGISTER method
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,6 +40,9 @@ public class editorController implements Initializable{
 
     @FXML
     public void sendNewData(){
+        //iterate through linked list and call ViewModel.update(newTeam);
+
+        //change this to just calling update
         String name = myName.getText();
         boolean nameUpdated = setName(name);
         String score = myScore.getText();
@@ -56,16 +63,22 @@ public class editorController implements Initializable{
         myDate.setText(teamInfo.getTimeStamp());
     }
 
+    /** MOVE SETNAME AND SET SCORE TO facade thats called in the viewmodel
+     * the checks can go there
+     * will send back data to updateStage() in views
+     */
+
+
     private boolean setName(String name) {
         if(name.equals(setTeam.getName())){
             myName.setText(name);
             return false;
         }
         if(name.length() >= 5 && name.length() <= 50) {
-            Pattern p = Pattern.compile("^[a-zA-Z0-9 _.-]*$");
+            Pattern p = Pattern.compile("^[a-zA-Z0-9 .-]*$");
             Matcher m = p.matcher(name);
             boolean b = m.matches();
-            if (b == false) {
+            if (!b) {
                 myName.setText(setTeam.getName());
                 return false;
             } else{
