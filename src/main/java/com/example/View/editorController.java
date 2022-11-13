@@ -8,12 +8,10 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static com.example.ViewModel.ViewModel.*;
 
-public class editorController implements Initializable{
+public class editorController extends Observable implements Initializable{
     @FXML
     TextField myName;
     @FXML
@@ -25,7 +23,7 @@ public class editorController implements Initializable{
     int index;
 
     //this can go away
-    Team setTeam;
+    //Team setTeam;
 
     //linked list of all the observers of this view aka linkedlist<ViewModel>
     //REGISTER method
@@ -33,7 +31,7 @@ public class editorController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Team teamInfo = getClickedTeam();
-        setTeam = teamInfo;
+        //setTeam = teamInfo;
         index = teamInfo.getIndex();
         updateStage(teamInfo);
     }
@@ -41,12 +39,14 @@ public class editorController implements Initializable{
     @FXML
     public void sendNewData(){
         //iterate through linked list and call ViewModel.update(newTeam);
-
+        Team newTeam = new Team(index, myName.getText(), myScore.getText(), myDate.getText());
         //change this to just calling update
+        updateObservers(new editorController(), newTeam);
+        /*
         String name = myName.getText();
-        boolean nameUpdated = setName(name);
+        //boolean nameUpdated = setName(name);
         String score = myScore.getText();
-        boolean scoreUpdated = setScore(score);
+        //boolean scoreUpdated = setScore(score);
         if(!nameUpdated && !scoreUpdated){
             myDate.setText(setTeam.getTimeStamp());
         } else {
@@ -54,7 +54,7 @@ public class editorController implements Initializable{
             myDate.setText(newTeam.getTimeStamp());
             setTeam = newTeam;
             updateStages(newTeam);
-        }
+        }*/
     }
 
     public void updateStage(Team teamInfo){
@@ -68,7 +68,7 @@ public class editorController implements Initializable{
      * will send back data to updateStage() in views
      */
 
-
+/*
     private boolean setName(String name) {
         if(name.equals(setTeam.getName())){
             myName.setText(name);
@@ -110,6 +110,6 @@ public class editorController implements Initializable{
             return false;
         }
         return true;
-    }
+    }*/
 }
 

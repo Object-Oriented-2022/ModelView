@@ -11,7 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.example.ViewModel.ViewModel.setScoreboardController;
-import static com.example.ViewModel.ViewModel.updateStages;
 
 public class Facade {
 
@@ -82,12 +81,12 @@ public class Facade {
             return oldInfo;
         }
     }
-    public static Team checkTeam(Team newInfo, Team oldInfo) {
+    public static Team checkedTeam(Team newInfo, Team oldInfo) {
         String name = checkName(newInfo.getName(), oldInfo.getName());
         String score = checkScore(newInfo.getScore(), oldInfo.getScore());
         Team newTeam = new Team(oldInfo.getIndex(), name, score);
         //check if no changes return original oldteam.getTimeStamp()
-        if (!newInfo.getName().equals(oldInfo.getName())) {
+        if (!name.equals(oldInfo.getName()) && !score.equals(oldInfo.getScore())) {
             //myDate.setText(setTeam.getTimeStamp());
             newTeam.setTimeStamp(oldInfo.getTimeStamp());
         }
