@@ -29,16 +29,21 @@ public class editorController extends Observable implements Initializable{
         updateStage(teamInfo);
     }
 
+    private void updateStage(Team teamInfo) {
+        myName.setText(teamInfo.getName());
+        myScore.setText(teamInfo.getScore());
+        myDate.setText(teamInfo.getTimeStamp());
+    }
+
     @FXML
     public void sendNewData(){
         Team newTeam = new Team(index, myName.getText(), myScore.getText(), myDate.getText());
         updateObservers(new editorController(), newTeam);
     }
 
-    public void updateStage(Team teamInfo){
-        myName.setText(teamInfo.getName());
-        myScore.setText(teamInfo.getScore());
-        myDate.setText(teamInfo.getTimeStamp());
+    @Override
+    public void update(Object teamInfo) {
+        updateStage((Team) teamInfo);
     }
 }
 

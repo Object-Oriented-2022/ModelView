@@ -5,7 +5,7 @@ import com.example.ViewModel.Observer;
 
 import java.util.LinkedList;
 
-public class Observable {
+public abstract class Observable implements Observables{
     LinkedList<Observer> observers = new LinkedList<>();
 
     public void addObserver(Observer observer){
@@ -17,5 +17,4 @@ public class Observable {
             observer.update(object, newTeam);
         }
     }
-
 }

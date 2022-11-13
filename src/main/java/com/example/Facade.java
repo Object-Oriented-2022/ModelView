@@ -10,12 +10,9 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.example.ViewModel.ViewModel.setScoreboardController;
+import static com.example.ViewModel.ViewModel.addScoreboardController;
 
 public class Facade {
-
-    //have to cast the editorController method
-
     public static editorController loadEditor() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(cs4773App.class.getResource("Editor.fxml"));
         Stage stage = new Stage();
@@ -33,7 +30,8 @@ public class Facade {
         stage.setTitle("Scoreboard");
         stage.setScene(scene);
         stage.show();
-        setScoreboardController(fxmlLoader.getController());
+        //TODO WHERE DO I GET SCOREBOARD CONTROLLER?
+        addScoreboardController(fxmlLoader.getController());
     }
 
     private static String checkName(String newInfo, String oldInfo) {
@@ -43,8 +41,8 @@ public class Facade {
             return newInfo;
         }
         //if empty
-        else if (newInfo == null || newInfo.trim().isEmpty()) {
-            return (newInfo = "No name provided");
+        else if (newInfo.trim().isEmpty()) {
+            return "No name provided";
         }
         //check for length restrictions
         else if(newInfo.length() >= 5 && newInfo.length() <= 50) {

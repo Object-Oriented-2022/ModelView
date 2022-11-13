@@ -27,8 +27,8 @@ public class scoreboardController extends Observable implements Initializable{
         myListView.getItems().addAll(populateScoreboard(new scoreboardController()));
     }
 
-    public void updateScoreboard() {
-        myListView.getItems().setAll(populateScoreboard(new scoreboardController()));
+    @Override
+    public void update(Object teams) {
+        myListView.getItems().setAll((String[]) teams);
     }
-
 }
