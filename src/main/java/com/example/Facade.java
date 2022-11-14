@@ -55,6 +55,7 @@ public class Facade {
         }
         return newTeam;
     }
+
     private static String checkName(String newInfo, String oldInfo) {
         if(newInfo.equals(oldInfo)){
             return newInfo;
