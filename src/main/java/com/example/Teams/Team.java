@@ -40,12 +40,12 @@ public class Team {
         this.timeStamp = timeStamp;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
     @Override
     public String toString() {
         return name + "\t" + score + "\t" + timeStamp;
-    }
-
-    public int getIndex() {
-        return index;
     }
 }

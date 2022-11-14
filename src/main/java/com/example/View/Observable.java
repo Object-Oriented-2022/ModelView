@@ -6,6 +6,7 @@ import com.example.ViewModel.Observer;
 import java.util.LinkedList;
 
 public abstract class Observable implements Observables{
+
     LinkedList<Observer> observers = new LinkedList<>();
 
     public void addObserver(Observer observer){

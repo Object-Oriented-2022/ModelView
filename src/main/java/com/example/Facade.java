@@ -7,12 +7,34 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.example.ViewModel.ViewModel.addScoreboardController;
 
 public class Facade {
+
+    public static void loadScoreboard(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(cs4773App.class.getResource("Scoreboard.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 340, 240);
+        stage.setTitle("Scoreboard");
+        stage.setScene(scene);
+        stage.show();
+        addScoreboardController(fxmlLoader.getController());
+    }
+
+    public static String[] convertToStringArray(ArrayList<Team> teams){
+        String[] scoreboardInfo = new String[5];
+        int i = 0;
+        for (Team team : teams) {
+            String row = String.format("%-30s", team.getName()) + team.getScore();
+            scoreboardInfo[i] = row;
+            i++;
+        }
+        return scoreboardInfo;
+    }
+
     public static editorController loadEditor() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(cs4773App.class.getResource("Editor.fxml"));
         Stage stage = new Stage();
@@ -24,27 +46,23 @@ public class Facade {
         return fxmlLoader.getController();
     }
 
-    public static void loadScoreboard(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(cs4773App.class.getResource("Scoreboard.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 340, 240);
-        stage.setTitle("Scoreboard");
-        stage.setScene(scene);
-        stage.show();
-        //TODO WHERE DO I GET SCOREBOARD CONTROLLER?
-        addScoreboardController(fxmlLoader.getController());
+    public static Team checkedTeam(Team newInfo, Team oldInfo) {
+        String name = checkName(newInfo.getName(), oldInfo.getName());
+        String score = checkScore(newInfo.getScore(), oldInfo.getScore());
+        Team newTeam = new Team(oldInfo.getIndex(), name, score);
+        if (!oldInfo.getName().equals(newTeam.getName()) && !oldInfo.getScore().equals(newTeam.getScore())) {
+            newTeam.setTimeStamp(oldInfo.getTimeStamp());
+        }
+        return newTeam;
     }
-
     private static String checkName(String newInfo, String oldInfo) {
         System.out.println(newInfo);
-        //no changes are made?
         if(newInfo.equals(oldInfo)){
             return newInfo;
         }
-        //if empty
         else if (newInfo.trim().isEmpty()) {
             return "No name provided";
         }
-        //check for length restrictions
         else if(newInfo.length() >= 5 && newInfo.length() <= 50) {
             Pattern p = Pattern.compile("^[a-zA-Z0-9 .-]*$");
             Matcher m = p.matcher(newInfo);
@@ -54,7 +72,7 @@ public class Facade {
             } else{
                 return newInfo;
             }
-        } else {        //TOO long or short or is empty set back to original value
+        } else {
             return oldInfo;
         }
     }
@@ -64,27 +82,15 @@ public class Facade {
             scoreValue = Integer.parseInt(newInfo);
         } catch (NumberFormatException error){
             System.out.println("Error: number format problem");
-            //error set back to original
             return oldInfo;
         }
         if(newInfo.equals(oldInfo)){
-           //if score is hasn't changed set to original
             return oldInfo;
         }
         if (scoreValue >= 0 && scoreValue <= 2000){
             return newInfo;
         } else {
-            //not inside the limit, set back to original
             return oldInfo;
         }
-    }
-    public static Team checkedTeam(Team newInfo, Team oldInfo) {
-        String name = checkName(newInfo.getName(), oldInfo.getName());
-        String score = checkScore(newInfo.getScore(), oldInfo.getScore());
-        Team newTeam = new Team(oldInfo.getIndex(), name, score);
-        if (!name.equals(oldInfo.getName()) && !score.equals(oldInfo.getScore())) {
-            newTeam.setTimeStamp(oldInfo.getTimeStamp());
-        }
-        return newTeam;
     }
 }

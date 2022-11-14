@@ -16,15 +16,15 @@ public class scoreboardController extends Observable implements Initializable{
     @FXML
     public ListView<String> myListView;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        myListView.getItems().addAll(populateScoreboard(new scoreboardController()));
+    }
+
     @FXML
     public void handleMouseClick() throws IOException {
         int clickedIndex = myListView.getSelectionModel().getSelectedIndex();
         openEditorView(clickedIndex);
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        myListView.getItems().addAll(populateScoreboard(new scoreboardController()));
     }
 
     @Override
